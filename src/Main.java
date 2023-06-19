@@ -1,17 +1,25 @@
+import java.io.IOException;
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.stream.IntStream;
+import java.util.stream.DoubleStream;
 
 public class Main {
-    public static void main(String[] args) {
-        num();
+    public static void main(String[] args) throws IOException {
+        try {
+            num();
+        } catch (InputMismatchException e) {
+            System.out.println("Введите дробное число с запятой");
+            num();
+        }
         name();
         array();
     }
 
     public static void num() {
+
         Scanner sc = new Scanner(System.in);
-        if (sc.nextInt() > 7) {
+        if (sc.nextDouble() > 7) {
             System.out.println("Привет");
         } else {
             System.out.println("Введите число больше 7");
@@ -22,7 +30,7 @@ public class Main {
     public static void name() {
         Scanner sc = new Scanner(System.in);
         String name = sc.nextLine();
-        if (name.equalsIgnoreCase("вячеслав")) {
+        if (name.equals("Вячеслав")) {
             System.out.println("Привет, Вячеслав");
         } else {
             System.out.println("Нет такого имени");
@@ -31,19 +39,11 @@ public class Main {
     }
 
     public static void array() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Введите размер массива: ");
-        int size = sc.nextInt();
-        int[] nums = new int [size];
-        System.out.println("Введите числа: ");
+        double[] nums = {5.1,33.3,39,9,21,48.1,71.2,6.66,15,99};
 
-        for (int i = 0; i < nums.length; i++){
-            nums[i] = sc.nextInt();
-        }
-        System.out.println("Числа в массиве кратные 3: "+ Arrays.toString(IntStream.of(nums).filter(x -> x % 3 == 0).toArray())) ;
+        System.out.println(Arrays.toString(DoubleStream.of(nums).filter(x -> x % 3 == 0).toArray()));
     }
 }
-
 
 
 
